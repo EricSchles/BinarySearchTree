@@ -40,6 +40,7 @@ class BinarySearchTree:
             return self._contains(self.root,val)
     
     def _contains(self,curr,val):
+        
         if curr.item == val:
             return True
         if val < curr.item:
@@ -71,17 +72,43 @@ class BinarySearchTree:
             if curr.right != None:
                 self._pretty_print(curr.right)
 
-    # def remove(self,val):
-    #     if self.contains(val):
-    #         if self.root.item == val:
-    #             return True
-    #         else:
-    #             return self._remove(self.root,val)
-    #     else:
-    #         raise Exception("Value you not in tree")
+#To Do: Finish BST remove method
+
+    def highest(self,node):
+        return self._highest(node)
+        
+    def _highest(self,curr):
+        if curr.right != None:
+            return self.right.highest(curr.right)
+        else:
+            return curr.item
     
-    # def _remove(self,curr,val):
-    #     if curr.item == val:
-    #think about how to do this...        
-                
-            
+    def lowest(self,node):
+        return self._lowest(node)
+
+    def _lowest(self,curr):
+        if curr.left != None:
+            return self._lowest(curr.left)
+        else:
+            return curr.item
+
+    def delete(self,value):
+        return self._delete(self.root,value)
+
+    def _delete(self,curr,value):
+        if value == curr.item:
+            if curr.left != None:
+                curr.item = self.highest(curr.left)
+                self._delete(curr.left)
+            elif curr.right != None:
+                curr.item = self.lowest(curr.right)
+                self._delete(curr.right,value)
+            else:
+                return None
+        else:
+            if value < curr.item and curr.left != None:
+                curr.left = self._delete(curr.left,value)
+            if value > curr.item and curr.right != None:
+                curr.right = self._delete(curr.right,value)
+            return curr.item
+
