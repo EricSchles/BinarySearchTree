@@ -1,0 +1,6 @@
+from bst_pure import BinarySearchTree
+
+def test_insert():
+    bst = BinarySearchTree(1)
+    bst.insert(2)
+    bst.insert(3)
