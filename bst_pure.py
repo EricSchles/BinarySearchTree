@@ -16,7 +16,7 @@ class BinarySearchTree:
 
     def insert(self,val):
         if self.root.item == None:
-            self.root = Node(root)
+            self.root = Node(val)
         else:
             self._insert(self.root,val)
 
@@ -60,29 +60,54 @@ class BinarySearchTree:
         if self.root.item == None:
             print None
         else:
-            self._pretty_print(self.root)
+            self._pretty_print(self.root,0)
     
-    def _pretty_print(self,curr):
+    def _pretty_print(self,curr,count):
         if curr.item == None:
             print None
         else:
             if curr.left != None:
-                self._pretty_print(curr.left)
-            print str(curr.item)
+                self._pretty_print(curr.left,count+1)
+            print (" "*count)+str(curr.item)
             if curr.right != None:
-                self._pretty_print(curr.right)
+                self._pretty_print(curr.right,count+1)
 
 #To Do: Finish BST remove method
+
+    def second_highest_node(self,node):
+        if node.right != None:
+            return self._second_highest_node(node)
+        else:
+            return None
+
+    def _second_highest_node(self,curr):
+        next_node = curr.right
+        if next_node.right != None:
+            return self._second_highest_node(next_node)
+        else:
+            return curr
 
     def highest(self,node):
         return self._highest(node)
         
     def _highest(self,curr):
         if curr.right != None:
-            return self.right.highest(curr.right)
+            return self._highest(curr.right)
         else:
             return curr.item
     
+    def second_lowest_node(self,node):
+        if node.left != None:
+            return self._second_lowest_node(node)
+        else:
+            return None
+    def _second_lowest_node(self,curr):
+        next_node = curr.left
+        if next_node.left != None:
+            return self._second_highest_node(next_node)
+        else:
+            return curr
+
     def lowest(self,node):
         return self._lowest(node)
 
@@ -99,16 +124,31 @@ class BinarySearchTree:
         if value == curr.item:
             if curr.left != None:
                 curr.item = self.highest(curr.left)
-                self._delete(curr.left)
+                second_largest_node = self.second_highest_node(curr.left)
+                if second_largest_node != None:
+                    second_largest_node.right = None
+                    return value
+                else:
+                    print "got here",1
+                    return None
             elif curr.right != None:
                 curr.item = self.lowest(curr.right)
-                self._delete(curr.right,value)
+                second_smallest_node = self.second_lowest_node(curr.right)
+                if second_smallest_node != None:
+                    second_smallest_node.left = None
+                    return value
+                else:
+                    print "got here",2
+                    return None
             else:
+                print "got here",3
                 return None
         else:
             if value < curr.item and curr.left != None:
-                curr.left = self._delete(curr.left,value)
-            if value > curr.item and curr.right != None:
-                curr.right = self._delete(curr.right,value)
-            return curr.item
+                self._delete(curr.left,value)
+            elif value > curr.item and curr.right != None:
+                self._delete(curr.right,value)
+            else:
+                print "got here",4
+                return None
 
