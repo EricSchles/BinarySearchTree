@@ -72,7 +72,7 @@ class BinarySearchTree:
             if curr.right != None:
                 self._pretty_print(curr.right,count+1)
 
-#To Do: Finish BST remove method
+
 
     def second_highest_node(self,node):
         if node.right != None:
@@ -129,8 +129,8 @@ class BinarySearchTree:
                     second_largest_node.right = None
                     return value
                 else:
-                    print "got here",1
-                    return None
+                    curr.left = None
+                    return value 
 
             elif curr.right != None:
                 curr.item = self.lowest(curr.right)
@@ -139,8 +139,8 @@ class BinarySearchTree:
                     second_smallest_node.left = None
                     return value
                 else:
-                    print "got here",2
-                    return None
+                    curr.right = None
+                    return value
             else:
                 if parent.left.item == value:
                     parent.left = None
