@@ -118,9 +118,9 @@ class BinarySearchTree:
             return curr.item
 
     def delete(self,value):
-        return self._delete(self.root,value)
+        return self._delete(self.root,value,None)
 
-    def _delete(self,curr,value):
+    def _delete(self,curr,value,parent):
         if value == curr.item:
             if curr.left != None:
                 curr.item = self.highest(curr.left)
@@ -131,6 +131,7 @@ class BinarySearchTree:
                 else:
                     print "got here",1
                     return None
+
             elif curr.right != None:
                 curr.item = self.lowest(curr.right)
                 second_smallest_node = self.second_lowest_node(curr.right)
@@ -141,13 +142,18 @@ class BinarySearchTree:
                     print "got here",2
                     return None
             else:
-                print "got here",3
-                return None
+                if parent.left.item == value:
+                    parent.left = None
+                    return value
+                else:
+                    parent.right = None
+                    return value
+                
         else:
             if value < curr.item and curr.left != None:
-                self._delete(curr.left,value)
+                self._delete(curr.left,value,curr)
             elif value > curr.item and curr.right != None:
-                self._delete(curr.right,value)
+                self._delete(curr.right,value,curr)
             else:
                 print "got here",4
                 return None

@@ -16,6 +16,8 @@ bt.insert(72)
 #x =bt.delete(5)
 
 #print bt.root.left
-bt.pretty_print()
+#bt.pretty_print()
 #print bt.contains(1)
 #print x
+bt.delete(76)
+bt.pretty_print()
