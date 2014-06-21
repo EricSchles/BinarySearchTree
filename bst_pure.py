@@ -155,6 +155,6 @@ class BinarySearchTree:
             elif value > curr.item and curr.right != None:
                 self._delete(curr.right,value,curr)
             else:
-                print "got here",4
+                
                 return None
 

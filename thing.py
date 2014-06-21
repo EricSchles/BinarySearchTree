@@ -9,6 +9,7 @@ bt.insert(76)
 bt.insert(12)
 bt.insert(82)
 bt.insert(72)
+# [bt.insert(i) for i in xrange(100)]
 # for i in xrange(50):
 #     if not bt.contains(i):
 #         print "contains failed"
@@ -19,5 +20,5 @@ bt.insert(72)
 #bt.pretty_print()
 #print bt.contains(1)
 #print x
-bt.delete(76)
+#bt.delete(76)
 bt.pretty_print()
