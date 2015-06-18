@@ -49,8 +49,8 @@ class BinarySearchTree:
             else:
                 return False
         elif val > curr.item:
-            if curr.right != None:
-                return self._contains(curr.right,val)
+            if curr.right != None: 
+               return self._contains(curr.right,val)
             else:
                 return False
         else:
